@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
-  final bool winned;
-  final bool lose;
+  bool winned;
+  bool lose;
   final Function() onReset;
 
-  const ResultWidget({ 
+  ResultWidget({ 
      this.winned = false,
      this.lose = false,
      required this.onReset
@@ -56,7 +56,4 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override  
   Size get preferredSize => Size.fromHeight(120);
-
-
-
 }
