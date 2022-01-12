@@ -23,7 +23,6 @@ class Board{
     for(int l = 0; l < lines; l++){
       for (int c = 0; c < columns; c++){
         _fields.add(Field(line: l, column: c));
-
       }
     }
   }
@@ -54,6 +53,8 @@ class Board{
 
   void reset(){
     _fields.forEach((f) => f.reset());
+
+    _raffleMines();
   }
 
   void revealBombs(){

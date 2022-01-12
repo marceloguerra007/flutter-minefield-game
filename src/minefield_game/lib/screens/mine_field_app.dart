@@ -3,7 +3,6 @@ import 'package:minefield_game/components/board_widget.dart';
 import 'package:minefield_game/components/result_widget.dart';
 import 'package:minefield_game/models/board.dart';
 import 'package:minefield_game/models/explosion_exception.dart';
-import '../components/field_widget.dart';
 import '../models/field.dart';
 
 class MineFieldApp extends StatefulWidget {
@@ -16,21 +15,25 @@ class MineFieldApp extends StatefulWidget {
 class _MineFieldAppState extends State<MineFieldApp> {
   bool _winned = false;
   bool _lose = false;
-  late Board _board;
+  Board _board = Board(lines: 1, columns: 1, bombsAmount: 0);
   
   void _resetGame(){
     setState(() {
       _winned = false;
       _lose = false;
-      _board.reset();
+      _board.reset();      
     });
   }
 
   void _open(Field field){
-    if (!_winned && !_lose){
+    print('abrir $_winned');
+    if (!_winned){
       setState(() {
         try {
           field.open();
+          
+          print('dentro try $_winned');
+
           if (_board.resolved){
             _winned = true;
             _lose = false;
@@ -60,10 +63,15 @@ class _MineFieldAppState extends State<MineFieldApp> {
     double fieldLenght = width / amountColumns;
     int amountLines = (height / fieldLenght).floor();
 
-    _board = Board(
+    Board board = Board(
       lines: amountLines, 
       columns: amountColumns, 
-      bombsAmount: 3);
+      bombsAmount: 3
+    );
+
+    if (_board.bombsAmount == 0){
+      _board = board;
+    }
 
     return _board;
   }
